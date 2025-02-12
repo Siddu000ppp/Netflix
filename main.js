@@ -17,9 +17,24 @@ auth.languageCode = 'en';
 const provider = new GoogleAuthProvider();
 
 // Select the specific Google login button
-const googleLogin = document.getElementById('googel'); // Change this according to your button ID
+const googleLogin = document.getElementById('googel');
+
+const googleLogins=document.getElementById('googele');// Change this according to your button ID
 
 googleLogin.addEventListener('click', function(){
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        console.log(user);
+        window.location.href = "index.html";
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Error during Google sign-in: ', errorMessage); // Handle errors properly
+    });
+});
+googleLogins.addEventListener('click', function(){
     signInWithPopup(auth, provider)
     .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
